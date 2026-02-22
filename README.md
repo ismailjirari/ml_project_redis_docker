@@ -84,8 +84,7 @@ ml/
 1. **Cloner le projet**
 
 ```bash
-git clone <url-du-repo>
-cd ml
+git clone https://github.com/ismailjirari/ml_project_redis_docker.git
 ```
 
 2. **Télécharger un modèle** *(si non présent)*
@@ -219,19 +218,36 @@ services:
       - ./backend:/app
       - ./backend/models:/app/models
     environment:
-      - REDIS_HOST=host.docker.internal  # Windows/Mac
-      # - REDIS_HOST=172.17.0.1          # Linux
+      - PYTHONUNBUFFERED=1
+      - REDIS_HOST=host.docker.internal  # Pour Windows/Mac
+      # - REDIS_HOST=172.17.0.1  # Pour Linux (décommentez cette ligne)
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+    extra_hosts:  # Pour Windows/Mac
+      - "host.docker.internal:host-gateway"
     networks:
       - ml-network
+    restart: unless-stopped
 
   frontend:
     build: ./frontend
     ports:
       - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - VITE_API_URL=http://backend:8000
     depends_on:
       - backend
     networks:
       - ml-network
+    restart: unless-stopped
+
+networks:
+  ml-network:
+    driver: bridge
 ```
 
 ### Configuration Redis
@@ -294,25 +310,10 @@ Le tutoriel couvre :
 
 ---
 
-## 🤝 Contribution
 
-Les contributions sont les bienvenues !
 
-1. Fork le projet
-2. Créer une branche (`git checkout -b feature/amelioration`)
-3. Commit vos changements (`git commit -m 'Ajout fonctionnalité'`)
-4. Push (`git push origin feature/amelioration`)
-5. Ouvrir une Pull Request
 
----
-
-## 📄 Licence
-
-MIT
-
----
-
-## 👨‍💻 Auteur
+## 👨‍💻 JIRARI ISMAIL
 
 Créé avec ❤️ pour la communauté ML/DL
 
