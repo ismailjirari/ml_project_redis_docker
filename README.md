@@ -1,6 +1,6 @@
 # 🧠 Sentence Embedding API
 
-Une application complète de génération d'embeddings de phrases utilisant des modèles Sentence Transformers, avec une API FastAPI, un cache Redis et une interface React moderne.
+Une application complète de génération d'embeddings de phrases utilisant des modèles **Sentence Transformers**, avec une API **FastAPI**, un cache **Redis** et une interface **React** moderne.
 
 ---
 
@@ -14,8 +14,9 @@ Une application complète de génération d'embeddings de phrases utilisant des 
 - [Utilisation de l'API](#-utilisation-de-lapi)
 - [Interface Frontend](#-interface-frontend)
 - [Cache Redis](#-cache-redis)
-- [Structure du projet](#-structure-détaillée)
+- [Structure du projet](#-structure-du-projet)
 - [Déploiement avec Docker](#-déploiement-avec-docker)
+- [Exécution du projet](#-exécution-du-projet)
 - [Dépannage](#-dépannage)
 - [Tutoriel vidéo](#-tutoriel-vidéo)
 
@@ -25,100 +26,102 @@ Une application complète de génération d'embeddings de phrases utilisant des 
 
 Cette application permet de :
 
-- Générer des embeddings (vecteurs) à partir de phrases
-- Utiliser différents modèles Sentence Transformers
+- Générer des embeddings (vecteurs) à partir de phrases en langage naturel
+- Utiliser plusieurs modèles Sentence Transformers interchangeables
 - Mettre en cache les résultats avec Redis pour des performances optimales
-- Visualiser les embeddings générés via une interface React
-- Interagir avec l'API RESTful FastAPI
+- Visualiser les embeddings générés via une interface React intuitive
+- Interagir avec le backend via une API RESTful documentée
 
 ---
 
-## 🏗 Architecture
+## 🏗️ Architecture
 
 ```
 ml/
-├── backend/                  # API FastAPI
-│   ├── app/                  # Code source backend
-│   │   ├── config.py         # Configuration
-│   │   ├── database.py       # Gestion Redis
-│   │   ├── ml_service.py     # Service d'embeddings
-│   │   ├── models.py         # Modèles Pydantic
+├── backend/                    # API FastAPI
+│   ├── app/
+│   │   ├── config.py           # Configuration globale
+│   │   ├── database.py         # Gestion Redis
+│   │   ├── ml_service.py       # Service d'embeddings
+│   │   ├── models.py           # Schémas Pydantic
 │   │   └── __init__.py
-│   ├── models/               # Modèles téléchargés
-│   │   └── all-MiniLM-L6-v2/
+│   ├── models/
+│   │   └── all-MiniLM-L6-v2/  # Modèle Sentence Transformer
 │   └── Dockerfile
-├── frontend/                 # Interface React
+├── frontend/                   # Interface React
 │   ├── src/
-│   │   ├── App.jsx           # Composant principal
+│   │   ├── App.jsx             # Composant principal
 │   │   └── App.css
 │   └── Dockerfile
-└── docker-compose.yml        # Orchestration des services
+└── docker-compose.yml          # Orchestration des services
 ```
 
 ---
 
 ## ✨ Fonctionnalités
 
-- **🔄 Multi-modèles** : Support de plusieurs modèles Sentence Transformers
-- **⚡ Cache Redis** : Mise en cache des embeddings pour des réponses plus rapides
-- **📊 Interface intuitive** : Frontend React pour visualiser les résultats
-- **🔌 API RESTful** : Endpoints clairs et documentés
-- **🐳 Docker** : Conteneurisation complète pour un déploiement facile
-- **📈 Scalable** : Architecture modulaire et extensible
+| Fonctionnalité | Description |
+|---|---|
+| 🔄 **Multi-modèles** | Support de plusieurs modèles Sentence Transformers |
+| ⚡ **Cache Redis** | Mise en cache des embeddings pour des réponses instantanées |
+| 📊 **Interface intuitive** | Frontend React pour visualiser et explorer les résultats |
+| 🔌 **API RESTful** | Endpoints clairs avec documentation interactive Swagger |
+| 🐳 **Docker** | Conteneurisation complète pour un déploiement reproductible |
+| 📈 **Scalable** | Architecture modulaire et facilement extensible |
 
 ---
 
 ## 📦 Prérequis
 
-- Docker et Docker Compose
-- Node.js *(optionnel, pour développement sans Docker)*
-- Python 3.11+ *(optionnel, pour développement sans Docker)*
-- Redis *(optionnel, géré automatiquement dans Docker)*
+- [Docker](https://www.docker.com/) et Docker Compose *(requis)*
+- Node.js *(optionnel, pour développement local sans Docker)*
+- Python 3.11+ *(optionnel, pour développement local sans Docker)*
+- Redis *(optionnel, géré automatiquement via Docker)*
 
 ---
 
 ## 🚀 Installation et démarrage
 
-### Avec Docker (recommandé)
+### Avec Docker *(recommandé)*
 
-1. **Cloner le projet**
+**1. Cloner le dépôt**
 
 ```bash
 git clone https://github.com/ismailjirari/ml_project_redis_docker.git
+cd ml_project_redis_docker
 ```
 
-2. **Télécharger un modèle** *(si non présent)*
+**2. Préparer le modèle** *(si non présent)*
 
 ```bash
-# Placez vos modèles Sentence Transformers dans backend/models/
 mkdir -p backend/models
-# Téléchargez et décompressez le modèle dans ce dossier
+# Téléchargez et placez votre modèle Sentence Transformer dans ce dossier
 ```
 
-3. **Lancer l'application**
+**3. Lancer l'application**
 
 ```bash
 docker-compose up --build
 ```
 
-4. **Accéder à l'application**
+**4. Accéder aux services**
 
 | Service | URL |
 |---|---|
-| Frontend | http://localhost:5173 |
-| API | http://localhost:8000 |
-| Documentation API | http://localhost:8000/docs |
+| 🖥️ Frontend | http://localhost:5173 |
+| 🔌 API Backend | http://localhost:8000 |
+| 📄 Documentation API | http://localhost:8000/docs |
 
 ---
 
-### Sans Docker (développement)
+### Sans Docker *(développement local)*
 
 **Backend**
 
 ```bash
 cd backend
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+source venv/bin/activate        # Windows : venv\Scripts\activate
 pip install -r requirements.txt
 python main.py
 ```
@@ -139,11 +142,11 @@ npm run dev
 
 | Méthode | Endpoint | Description |
 |---|---|---|
-| `GET` | `/` | Informations de l'API |
+| `GET` | `/` | Informations générales de l'API |
 | `POST` | `/postageee/` | Créer un embedding |
-| `GET` | `/gettage/` | Liste tous les embeddings |
-| `GET` | `/models/` | Modèles disponibles |
-| `GET` | `/redis-test` | Test connexion Redis |
+| `GET` | `/gettage/` | Lister tous les embeddings |
+| `GET` | `/models/` | Lister les modèles disponibles |
+| `GET` | `/redis-test` | Tester la connexion Redis |
 
 ### Exemples d'utilisation
 
@@ -163,44 +166,44 @@ curl "http://localhost:8000/gettage/"
 
 L'interface React propose :
 
-- 📝 **Formulaire de création** : Entrez vos phrases et choisissez un modèle
-- 📋 **Liste des embeddings** : Visualisez tous les embeddings générés
-- 🔍 **Détails des vecteurs** : Aperçu et visualisation complète des embeddings
-- 🔄 **Rafraîchissement** : Mise à jour en temps réel de la liste
-- 📊 **Statut API** : Indicateur de connexion au backend
+- 📝 **Formulaire de création** — Saisissez une phrase et sélectionnez un modèle
+- 📋 **Liste des embeddings** — Visualisez l'ensemble des embeddings générés
+- 🔍 **Détails des vecteurs** — Aperçu et exploration complète des embeddings
+- 🔄 **Rafraîchissement** — Mise à jour en temps réel de la liste
+- 📊 **Statut API** — Indicateur de connexion au backend
 
 ---
 
 ## 🔧 Cache Redis
 
-Le système utilise Redis pour :
+Le système utilise Redis pour optimiser les performances :
 
-- **Mise en cache** : Les embeddings sont stockés avec une clé unique *(hash du texte + modèle)*
-- **TTL** : Cache valide 1 heure *(configurable)*
-- **Performance** : Évite de recalculer les mêmes embeddings
-- **Clés** : Format `embedding:[hash]` et `phrase:[id]`
+- **Mise en cache** — Les embeddings sont stockés avec une clé unique *(hash du texte + modèle)*
+- **TTL configurable** — Expiration du cache fixée à 1 heure par défaut
+- **Performance** — Évite de recalculer des embeddings identiques
+- **Format des clés** — `embedding:[hash]` et `phrase:[id]`
 
 ---
 
-## 📁 Structure détaillée
+## 📁 Structure du projet
 
 ### Backend (FastAPI)
 
 | Fichier | Rôle |
 |---|---|
-| `main.py` | Point d'entrée, configuration CORS, routes principales |
-| `app/config.py` | Configuration Redis, chemins des modèles |
-| `app/database.py` | Gestion Redis et base de données en mémoire |
-| `app/ml_service.py` | Service d'embeddings avec cache |
-| `app/models.py` | Schémas Pydantic |
+| `main.py` | Point d'entrée, configuration CORS, définition des routes |
+| `app/config.py` | Configuration Redis et chemins des modèles |
+| `app/database.py` | Gestion Redis et stockage en mémoire |
+| `app/ml_service.py` | Logique d'embeddings avec gestion du cache |
+| `app/models.py` | Schémas de validation Pydantic |
 
 ### Frontend (React + Vite)
 
-`App.jsx` — Composant principal avec :
-- Gestion d'état (`useState`, `useEffect`)
-- Appels API `fetch`
-- Rendu conditionnel
-- Formatage des embeddings
+`App.jsx` — Composant principal incluant :
+
+- Gestion d'état avec `useState` et `useEffect`
+- Appels API via `fetch`
+- Rendu conditionnel et formatage des embeddings
 
 ---
 
@@ -219,12 +222,12 @@ services:
       - ./backend/models:/app/models
     environment:
       - PYTHONUNBUFFERED=1
-      - REDIS_HOST=host.docker.internal  # Pour Windows/Mac
-      # - REDIS_HOST=172.17.0.1  # Pour Linux (décommentez cette ligne)
+      - REDIS_HOST=host.docker.internal  # Windows/Mac
+      # - REDIS_HOST=172.17.0.1          # Linux (décommenter cette ligne)
       - REDIS_PORT=6379
       - REDIS_DB=0
-    extra_hosts:  # Pour Windows/Mac
-      - "host.docker.internal:host-gateway"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"  # Windows/Mac
     networks:
       - ml-network
     restart: unless-stopped
@@ -250,9 +253,9 @@ networks:
     driver: bridge
 ```
 
-### Configuration Redis
+### Configuration Redis selon l'OS
 
-**Windows/Mac :**
+**Windows / macOS :**
 ```yaml
 environment:
   - REDIS_HOST=host.docker.internal
@@ -268,30 +271,72 @@ environment:
 
 ---
 
+## 🖥️ Exécution du projet
+
+Cette section illustre le fonctionnement de chaque composant à travers des captures d'écran commentées.
+
+### 1. Lancement des services avec Docker Compose
+
+![Docker Compose](./images/docker_compose_run_1.png)
+
+Le démarrage de l'infrastructure complète via `docker-compose up` initialise simultanément tous les conteneurs (base de données, cache Redis, API backend, interface frontend). Les logs en temps réel confirment que chaque service est opérationnel, les ports sont exposés et la configuration est valide.
+
+---
+
+### 2. Documentation interactive de l'API FastAPI
+
+![FastAPI Swagger UI](./images/fastapi_docs_2.png)
+
+L'interface Swagger UI, accessible à l'adresse `/docs`, est générée automatiquement par FastAPI. Elle liste tous les endpoints disponibles, leurs méthodes HTTP, les schémas de données attendus et retournés, et permet de tester l'API directement depuis le navigateur — sans écrire de code client.
+
+---
+
+### 3. Interface utilisateur React
+
+![Interface React](./images/react_interface_3.png)
+
+Le frontend React constitue la vitrine de l'application. Il communique en arrière-plan avec l'API FastAPI, effectue un rendu dynamique des données sans rechargement de page, et propose une mise en page responsive adaptée à tous les appareils.
+
+---
+
+### 4. Mise en cache avec Redis
+
+![Redis Cache](./images/redis_store_cache_4.png)
+
+Redis stocke les embeddings en mémoire avec leurs clés, valeurs et mécanismes d'expiration (TTL). Cette couche de cache évite les calculs redondants et les accès répétés à la base de données, réduisant considérablement les temps de réponse.
+
+---
+
+### 5. Génération d'embeddings textuels
+
+![Embeddings](./images/embeddings_text_5.png)
+
+Le cœur du projet : la vectorisation de texte. Les phrases sont transformées en vecteurs numériques de haute dimension capturant leur sens sémantique. Ces embeddings permettent de calculer des similarités entre textes et d'alimenter des fonctionnalités avancées comme la recherche sémantique, le clustering ou la recommandation.
+
+---
+
 ## 🔍 Dépannage
 
-### Redis non accessible
+**Redis non accessible**
+- Vérifiez que Redis est installé et en cours d'exécution localement
+- Testez la connexion via l'endpoint `/redis-test`
+- Ajustez la variable `REDIS_HOST` dans `docker-compose.yml` selon votre OS
 
-- Vérifiez que Redis est installé localement
-- Testez avec `/redis-test`
-- Ajustez `REDIS_HOST` dans `docker-compose.yml`
+**Modèles non chargés**
+- Vérifiez que les modèles sont présents dans `backend/models/`
+- Chaque modèle doit être dans son propre sous-dossier
 
-### Modèles non chargés
-
-- Vérifiez le dossier `backend/models/`
-- Les modèles doivent être dans des sous-dossiers
-
-### CORS errors
-
-- Les origines autorisées sont configurées dans `main.py`
+**Erreurs CORS**
+- Les origines autorisées sont définies dans `main.py`
 - Par défaut : `http://localhost:5173`
 
-### Ports déjà utilisés
-
+**Ports déjà utilisés**
 ```bash
-# Vérifier les ports utilisés
-netstat -ano | findstr :8000   # Windows
-lsof -i :8000                  # Mac/Linux
+# Windows
+netstat -ano | findstr :8000
+
+# macOS / Linux
+lsof -i :8000
 ```
 
 ---
@@ -300,21 +345,14 @@ lsof -i :8000                  # Mac/Linux
 
 Regardez le tutoriel complet sur Google Drive :
 
-🔗 [Dossier tutoriel vidéo](https://drive.google.com/drive/folders/1Gt88BQ_q6W4w9W9e6-JF-N-TXBfZbJcy)
+🔗 [Accéder au dossier tutoriel](https://drive.google.com/drive/folders/1Gt88BQ_q6W4w9W9e6-JF-N-TXBfZbJcy)
 
-Le tutoriel couvre :
-- Installation et configuration
-- Démonstration de l'application
-- Explication du code
-- Déploiement avec Docker
+Le tutoriel couvre l'installation, la configuration, une démonstration complète de l'application, l'explication du code et le déploiement avec Docker.
 
 ---
 
+## 👨‍💻 Auteur
 
+**JIRARI Ismail** — Créé avec ❤️ pour la communauté ML/DL
 
-
-## 👨‍💻 JIRARI ISMAIL
-
-Créé avec ❤️ pour la communauté ML/DL
-
-📧 **Support** : Pour toute question, consultez le tutoriel vidéo ou ouvrez une issue sur GitHub.
+📧 Pour toute question, consultez le tutoriel vidéo ou ouvrez une [issue sur GitHub](https://github.com/ismailjirari/ml_project_redis_docker/issues).
