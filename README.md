@@ -271,6 +271,8 @@ environment:
 
 ---
 
+---
+
 ## 🖥️ Exécution du projet
 
 Cette section illustre le fonctionnement de chaque composant à travers des captures d'écran commentées.
@@ -312,6 +314,9 @@ Redis stocke les embeddings en mémoire avec leurs clés, valeurs et mécanismes
 ![Embeddings](./images/embeddings_text_5.png)
 
 Le cœur du projet : la vectorisation de texte. Les phrases sont transformées en vecteurs numériques de haute dimension capturant leur sens sémantique. Ces embeddings permettent de calculer des similarités entre textes et d'alimenter des fonctionnalités avancées comme la recherche sémantique, le clustering ou la recommandation.
+
+---
+
 
 ---
 
