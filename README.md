@@ -6,19 +6,19 @@ Une application complète de génération d'embeddings de phrases utilisant des 
 
 ## 📋 Table des matières
 
-- [Aperçu du projet](#-aperçu-du-projet)
-- [Architecture](#-architecture)
-- [Fonctionnalités](#-fonctionnalités)
-- [Prérequis](#-prérequis)
-- [Installation et démarrage](#-installation-et-démarrage)
-- [Utilisation de l'API](#-utilisation-de-lapi)
-- [Interface Frontend](#-interface-frontend)
-- [Cache Redis](#-cache-redis)
-- [Structure du projet](#-structure-du-projet)
-- [Déploiement avec Docker](#-déploiement-avec-docker)
-- [Exécution du projet](#-exécution-du-projet)
-- [Dépannage](#-dépannage)
-- [Tutoriel vidéo](#-tutoriel-vidéo)
+- [Aperçu du projet](#aperçu-du-projet)
+- [Architecture](#architecture)
+- [Fonctionnalités](#fonctionnalités)
+- [Prérequis](#prérequis)
+- [Installation et démarrage](#installation-et-démarrage)
+- [Utilisation de l'API](#utilisation-de-lapi)
+- [Interface Frontend](#interface-frontend)
+- [Cache Redis](#cache-redis)
+- [Structure du projet](#structure-du-projet)
+- [Déploiement avec Docker](#déploiement-avec-docker)
+- [Exécution du projet](#exécution-du-projet)
+- [Dépannage](#dépannage)
+- [Tutoriel vidéo](#tutoriel-vidéo)
 
 ---
 
@@ -271,7 +271,6 @@ environment:
 
 ---
 
-
 ## 🖥️ Exécution du projet
 
 Cette section illustre le fonctionnement de chaque composant à travers des captures d'écran commentées.
@@ -315,8 +314,6 @@ Redis stocke les embeddings en mémoire avec leurs clés, valeurs et mécanismes
 Le cœur du projet : la vectorisation de texte. Les phrases sont transformées en vecteurs numériques de haute dimension capturant leur sens sémantique. Ces embeddings permettent de calculer des similarités entre textes et d'alimenter des fonctionnalités avancées comme la recherche sémantique, le clustering ou la recommandation.
 
 ---
-
-
 
 ## 🔍 Dépannage
 
