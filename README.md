@@ -271,7 +271,6 @@ environment:
 
 ---
 
----
 
 ## 🖥️ Exécution du projet
 
@@ -318,7 +317,6 @@ Le cœur du projet : la vectorisation de texte. Les phrases sont transformées e
 ---
 
 
----
 
 ## 🔍 Dépannage
 
