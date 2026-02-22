@@ -1,0 +1,39 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - ./backend/models:/app/models
+    environment:
+      - PYTHONUNBUFFERED=1
+      - REDIS_HOST=host.docker.internal  # Pour Windows/Mac
+      # - REDIS_HOST=172.17.0.1  # Pour Linux (décommentez cette ligne)
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+    extra_hosts:  # Pour Windows/Mac
+      - "host.docker.internal:host-gateway"
+    networks:
+      - ml-network
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - VITE_API_URL=http://backend:8000
+    depends_on:
+      - backend
+    networks:
+      - ml-network
+    restart: unless-stopped
+
+networks:
+  ml-network:
+    driver: bridge
