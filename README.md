@@ -1,31 +1,28 @@
-# 🧠 Sentence Embedding API
-
-Une application complète de génération d'embeddings de phrases utilisant des modèles **Sentence Transformers**, avec une API **FastAPI**, un cache **Redis** et une interface **React** moderne.
+# 🧠 Sentence Embedding API Une application complète de génération d'embeddings de phrases utilisant des modèles **Sentence Transformers**, avec une API **FastAPI**, un cache **Redis** et une interface **React** moderne.
 
 ---
 
 ## 📋 Table des matières
 
-- [Aperçu du projet](#aperçu-du-projet)
-- [Architecture](#architecture)
-- [Fonctionnalités](#fonctionnalités)
-- [Prérequis](#prérequis)
-- [Installation et démarrage](#installation-et-démarrage)
-- [Utilisation de l'API](#utilisation-de-lapi)
-- [Interface Frontend](#interface-frontend)
-- [Cache Redis](#cache-redis)
-- [Structure du projet](#structure-du-projet)
-- [Déploiement avec Docker](#déploiement-avec-docker)
-- [Exécution du projet](#exécution-du-projet)
-- [Dépannage](#dépannage)
-- [Tutoriel vidéo](#tutoriel-vidéo)
+- [Aperçu du projet](#-aperçu-du-projet)
+- [Architecture](#️-architecture)
+- [Fonctionnalités](#-fonctionnalités)
+- [Prérequis](#-prérequis)
+- [Installation et démarrage](#-installation-et-démarrage)
+- [Utilisation de l'API](#-utilisation-de-lapi)
+- [Interface Frontend](#-interface-frontend)
+- [Cache Redis](#-cache-redis)
+- [Structure du projet](#-structure-du-projet)
+- [Déploiement avec Docker](#-déploiement-avec-docker)
+- [Exécution du projet](#️-exécution-du-projet)
+- [Dépannage](#-dépannage)
+- [Tutoriel vidéo](#-tutoriel-vidéo)
 
 ---
 
 ## 🎯 Aperçu du projet
 
 Cette application permet de :
-
 - Générer des embeddings (vecteurs) à partir de phrases en langage naturel
 - Utiliser plusieurs modèles Sentence Transformers interchangeables
 - Mettre en cache les résultats avec Redis pour des performances optimales
@@ -38,22 +35,22 @@ Cette application permet de :
 
 ```
 ml/
-├── backend/                    # API FastAPI
+├── backend/                  # API FastAPI
 │   ├── app/
-│   │   ├── config.py           # Configuration globale
-│   │   ├── database.py         # Gestion Redis
-│   │   ├── ml_service.py       # Service d'embeddings
-│   │   ├── models.py           # Schémas Pydantic
+│   │   ├── config.py         # Configuration globale
+│   │   ├── database.py       # Gestion Redis
+│   │   ├── ml_service.py     # Service d'embeddings
+│   │   ├── models.py         # Schémas Pydantic
 │   │   └── __init__.py
 │   ├── models/
-│   │   └── all-MiniLM-L6-v2/  # Modèle Sentence Transformer
+│   │   └── all-MiniLM-L6-v2/ # Modèle Sentence Transformer
 │   └── Dockerfile
-├── frontend/                   # Interface React
+├── frontend/                 # Interface React
 │   ├── src/
-│   │   ├── App.jsx             # Composant principal
+│   │   ├── App.jsx           # Composant principal
 │   │   └── App.css
 │   └── Dockerfile
-└── docker-compose.yml          # Orchestration des services
+└── docker-compose.yml        # Orchestration des services
 ```
 
 ---
@@ -85,21 +82,18 @@ ml/
 ### Avec Docker *(recommandé)*
 
 **1. Cloner le dépôt**
-
 ```bash
 git clone https://github.com/ismailjirari/ml_project_redis_docker.git
 cd ml_project_redis_docker
 ```
 
 **2. Préparer le modèle** *(si non présent)*
-
 ```bash
 mkdir -p backend/models
 # Téléchargez et placez votre modèle Sentence Transformer dans ce dossier
 ```
 
 **3. Lancer l'application**
-
 ```bash
 docker-compose up --build
 ```
@@ -117,17 +111,15 @@ docker-compose up --build
 ### Sans Docker *(développement local)*
 
 **Backend**
-
 ```bash
 cd backend
 python -m venv venv
-source venv/bin/activate        # Windows : venv\Scripts\activate
+source venv/bin/activate  # Windows : venv\Scripts\activate
 pip install -r requirements.txt
 python main.py
 ```
 
 **Frontend**
-
 ```bash
 cd frontend
 npm install
@@ -165,7 +157,6 @@ curl "http://localhost:8000/gettage/"
 ## 💻 Interface Frontend
 
 L'interface React propose :
-
 - 📝 **Formulaire de création** — Saisissez une phrase et sélectionnez un modèle
 - 📋 **Liste des embeddings** — Visualisez l'ensemble des embeddings générés
 - 🔍 **Détails des vecteurs** — Aperçu et exploration complète des embeddings
@@ -177,7 +168,6 @@ L'interface React propose :
 ## 🔧 Cache Redis
 
 Le système utilise Redis pour optimiser les performances :
-
 - **Mise en cache** — Les embeddings sont stockés avec une clé unique *(hash du texte + modèle)*
 - **TTL configurable** — Expiration du cache fixée à 1 heure par défaut
 - **Performance** — Évite de recalculer des embeddings identiques
@@ -200,7 +190,6 @@ Le système utilise Redis pour optimiser les performances :
 ### Frontend (React + Vite)
 
 `App.jsx` — Composant principal incluant :
-
 - Gestion d'état avec `useState` et `useEffect`
 - Appels API via `fetch`
 - Rendu conditionnel et formatage des embeddings
