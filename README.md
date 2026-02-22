@@ -293,7 +293,7 @@ L'interface Swagger UI, accessible à l'adresse `/docs`, est générée automati
 
 ### 3. Interface utilisateur React
 
-![Interface React](./images/react_interface_3.png)
+![Interface React](./images/react interface_3.png)
 
 Le frontend React constitue la vitrine de l'application. Il communique en arrière-plan avec l'API FastAPI, effectue un rendu dynamique des données sans rechargement de page, et propose une mise en page responsive adaptée à tous les appareils.
 
